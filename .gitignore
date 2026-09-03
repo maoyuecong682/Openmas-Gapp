@@ -1,0 +1,10 @@
+.cache/
+secrets/
+outputs/
+logs/
+tmp/
+q2_datasets/
+*.checkpoint
+*.pyc
+__pycache__/
+.pytest_cache/

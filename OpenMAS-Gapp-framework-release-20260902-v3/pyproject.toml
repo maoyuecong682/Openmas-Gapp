@@ -1,0 +1,19 @@
+[project]
+name = "openmas-benchmark"
+version = "0.1.0"
+description = "Controlled reference baselines and domain packages for OpenMAS-Gapp"
+requires-python = ">=3.10"
+
+[project.scripts]
+openmas-bench = "openmas_bench.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["openmas_bench*"]
+exclude = ["tests*", "scripts*", "examples*", "schemas*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

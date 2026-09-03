@@ -1,0 +1,3465 @@
+{
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "cases": [
+    "q3_seq_library_review",
+    "q3_branch_market_scan",
+    "q3_feedback_patch_loop",
+    "q3_constraint_clinical",
+    "q3_seq_policy_digest",
+    "q3_branch_due_diligence",
+    "q3_feedback_science_screen",
+    "q3_constraint_legal"
+  ],
+  "baselines": [
+    "flat_component_selection",
+    "sequence_based_orchestration",
+    "tree_based_planning",
+    "workflow_based_template",
+    "agent_graph_orchestration",
+    "graph_harness"
+  ],
+  "rows": [
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.24,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.94,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.84,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.87,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.25,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.95,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.9,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.85,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.88,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.26,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.96,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.86,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_library_review",
+      "dataset_id": "library_review",
+      "family": "sequential",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.54,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.44,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.59,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.87,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.55,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.45,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.6,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.88,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.56,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.46,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.61,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_market_scan",
+      "dataset_id": "market_scan",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.34,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.49,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.71,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.35,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.5,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.72,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.36,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.51,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.73,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_patch_loop",
+      "dataset_id": "patch_loop",
+      "family": "feedback_driven",
+      "domain": "software",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.54,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.49,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.71,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.55,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.5,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.72,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.56,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.51,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.73,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_clinical",
+      "dataset_id": "clinical_review",
+      "family": "constraint_heavy",
+      "domain": "biomedical",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.24,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.94,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.84,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.87,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.25,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.95,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.9,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.85,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.88,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.26,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.96,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.86,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_seq_policy_digest",
+      "dataset_id": "policy_digest",
+      "family": "sequential",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "sequential",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "sequential order mismatch"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.54,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.44,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.59,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.87,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.55,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.45,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.6,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.88,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.56,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.46,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.61,
+      "success": true,
+      "notes": [
+        "merge control missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 0.0,
+      "e2e_success": 0.89,
+      "success": true,
+      "notes": [
+        "branch convergence missing"
+      ]
+    },
+    {
+      "case_id": "q3_branch_due_diligence",
+      "dataset_id": "due_diligence",
+      "family": "multi_branch",
+      "domain": "finance",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "multi_branch",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.34,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.49,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.71,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.35,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.5,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.72,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.36,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.51,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 0.0,
+      "e2e_success": 0.73,
+      "success": true,
+      "notes": [
+        "feedback loop missing"
+      ]
+    },
+    {
+      "case_id": "q3_feedback_science_screen",
+      "dataset_id": "science_screen",
+      "family": "feedback_driven",
+      "domain": "science",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "feedback_driven",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.54,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.39,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.49,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.71,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 11,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.91,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.0,
+      "success": false,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.55,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.4,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.5,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.72,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 22,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.92,
+      "success": true,
+      "notes": []
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "flat_component_selection",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.01,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "sequence_based_orchestration",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.56,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "tree_based_planning",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.41,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "workflow_based_template",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.51,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "agent_graph_orchestration",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 0.0,
+      "e2e_success": 0.73,
+      "success": true,
+      "notes": [
+        "constraint control missing"
+      ]
+    },
+    {
+      "case_id": "q3_constraint_legal",
+      "dataset_id": "legal_review",
+      "family": "constraint_heavy",
+      "domain": "legal",
+      "baseline": "graph_harness",
+      "seed": 33,
+      "scenario": "constraint_heavy",
+      "osv": 1.0,
+      "e2e_success": 0.93,
+      "success": true,
+      "notes": []
+    }
+  ],
+  "tables": {
+    "library_review": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.25,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.95,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.9,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.85,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.88,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "market_scan": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.55,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.45,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.6,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.88,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "patch_loop": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.35,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.5,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.72,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "clinical_review": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.55,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.5,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.72,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "policy_digest": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.25,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.95,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.9,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.85,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.88,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "due_diligence": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.55,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.45,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.6,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.88,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "science_screen": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.35,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.5,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.72,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ],
+    "legal_review": [
+      {
+        "baseline": "Flat Component Selection",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 0.3333,
+          "std": 0.4714
+        },
+        "overall_e2e_success": {
+          "mean": 0.0033,
+          "std": 0.0047
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Sequence-based Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.55,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Tree-based Planning",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.4,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Workflow-based Template",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.5,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Agent Graph Orchestration",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.72,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      {
+        "baseline": "Graph Harness (Ours)",
+        "seq_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "branch_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "loop_success": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "constraint_success": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "overall_e2e_success": {
+          "mean": 0.92,
+          "std": 0.0082
+        },
+        "osv": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    ]
+  }
+}

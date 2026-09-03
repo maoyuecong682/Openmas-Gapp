@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openmas-gapp.org/schemas/construction-result-v1.json",
+  "title": "OpenMAS-Gapp Construction Result v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "method", "requirement_model", "blueprint", "application", "telemetry"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "method": {"type": "string", "enum": ["direct_mas_generation", "plan_based_construction", "component_based_assembly", "workflow_based_construction", "graph_harness"]},
+    "requirement_model": {"$ref": "#/$defs/requirement_model"},
+    "blueprint": {"$ref": "#/$defs/blueprint"},
+    "application": {"$ref": "#/$defs/application"},
+    "telemetry": {"type": "object", "required": ["planning_steps", "model_calls", "inspected_components", "notes"]}
+  },
+  "$defs": {
+    "requirement_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["goal", "tasks", "task_dependencies", "capability_requirements", "constraints", "metadata"],
+      "properties": {
+        "goal": {"type": "object", "required": ["id", "description", "success_criteria"]},
+        "tasks": {"type": "array", "items": {"type": "object", "required": ["id", "objective", "inputs", "outputs"]}},
+        "task_dependencies": {"type": "array", "items": {"type": "object", "required": ["source", "target", "relation", "condition"]}},
+        "capability_requirements": {"type": "array", "items": {"type": "object", "required": ["id", "task_id", "description", "tags"]}},
+        "constraints": {"type": "array", "items": {"type": "object", "required": ["id", "kind", "target", "predicate", "severity"]}},
+        "metadata": {"type": "object", "not": {"anyOf": [{"required": ["agent"]}, {"required": ["tool"]}, {"required": ["implementation_ref"]}]}}
+      }
+    },
+    "blueprint": {
+      "type": "object",
+      "required": ["case_id", "method", "nodes", "edges", "constraint_refs", "metadata"],
+      "properties": {
+        "case_id": {"type": "string"}, "method": {"type": "string"},
+        "nodes": {"type": "array", "items": {"type": "object", "required": ["id", "kind", "description", "requirement_refs", "capability_refs", "binding_constraints"], "properties": {"kind": {"enum": ["task", "capability", "component_requirement", "resource_requirement", "control"]}}}},
+        "edges": {"type": "array", "items": {"type": "object", "required": ["source", "target", "relation", "condition"]}},
+        "constraint_refs": {"type": "array", "items": {"type": "string"}}, "metadata": {"type": "object"}
+      }
+    },
+    "application": {
+      "type": "object",
+      "required": ["case_id", "method", "nodes", "edges", "entrypoints", "metadata"],
+      "properties": {
+        "case_id": {"type": "string"}, "method": {"type": "string"},
+        "nodes": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "kind", "implementation_ref", "realizes_blueprint_node", "capabilities", "config"], "properties": {"kind": {"enum": ["agent", "tool", "memory", "control"]}}}},
+        "edges": {"type": "array"}, "entrypoints": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "metadata": {"type": "object"}
+      }
+    }
+  }
+}

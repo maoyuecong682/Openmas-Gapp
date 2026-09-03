@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openmas-gapp.org/schemas/domain-package.schema.json",
+  "title": "OpenMAS-Gapp Domain Package",
+  "type": "object",
+  "required": ["package_id", "domain", "application", "source", "requirement", "capabilities", "contracts", "execution_tasks"],
+  "properties": {
+    "package_id": {"type": "string", "minLength": 1},
+    "domain": {"type": "string", "minLength": 1},
+    "application": {"type": "string", "minLength": 1},
+    "source": {"type": "object"},
+    "requirement": {
+      "type": "object",
+      "required": ["goal", "process", "resources", "governance", "output"]
+    },
+    "capabilities": {"type": "array", "items": {"$ref": "#/$defs/capability"}},
+    "contracts": {"type": "array", "items": {"$ref": "#/$defs/contract"}},
+    "execution_tasks": {"type": "array", "items": {"type": "object"}},
+    "mutations": {"type": "array", "items": {"type": "object"}},
+    "split": {"enum": ["train", "dev", "test"]},
+    "metadata": {"type": "object"}
+  },
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "required": ["id", "kind", "description"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"type": "string"}, "description": {"type": "string"},
+        "inputs": {"type": "array"}, "outputs": {"type": "array"}, "tags": {"type": "array"}, "risk": {"type": "string"}
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": ["id", "kind", "target", "predicate", "description"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"type": "string"}, "target": {"type": "string"},
+        "predicate": {"type": "string"}, "description": {"type": "string"}, "severity": {"type": "string"}
+      }
+    }
+  }
+}
+

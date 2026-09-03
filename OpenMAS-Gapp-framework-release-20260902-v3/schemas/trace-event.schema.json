@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openmas-gapp.org/schemas/trace-event.schema.json",
+  "title": "OpenMAS-Gapp Trace Event",
+  "type": "object",
+  "required": ["event_id", "package_id", "task_id", "actor", "action", "timestamp"],
+  "properties": {
+    "event_id": {"type": "string"}, "package_id": {"type": "string"}, "task_id": {"type": "string"},
+    "actor": {"type": "string"}, "action": {"type": "string"}, "timestamp": {"type": "string"},
+    "input_refs": {"type": "array"}, "output_refs": {"type": "array"},
+    "capability_refs": {"type": "array"}, "contract_refs": {"type": "array"}, "payload": {"type": "object"}
+  }
+}
