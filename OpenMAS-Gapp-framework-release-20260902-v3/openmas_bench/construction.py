@@ -182,7 +182,11 @@ class GraphHarnessConstruction(ConstructionMethod):
 
     def construct(self, request: ConstructionRequest) -> ConstructionResult:
         telemetry = self._model_call(request)
-        model = self._ground(request, use_task_graph=True, use_constraints=True)
+        # The LLM may suggest preferred components, but it must not delete
+        # required tasks or governance constraints from the global graph.
+        model = ground_requirement(
+            request, use_task_graph=True, use_constraints=True, selection=None)
+        telemetry.notes.append("global_requirement_grounding=true")
         profile = dict(request.metadata.get("task_profile") or {})
         grounding_repaired = False
         if ((profile.get("requires_multi_branch") or profile.get("requires_evidence_merge"))
@@ -200,6 +204,13 @@ class GraphHarnessConstruction(ConstructionMethod):
             request, model.capability_requirements, inspect_relations=True,
             selection=None) if grounding_repaired else
             self._components(request, model.capability_requirements, inspect_relations=True))
+        selected, component_repair_ids = _complete_component_selection(
+            request, model.capability_requirements, selected)
+        if component_repair_ids:
+            telemetry.json_repaired = True
+            telemetry.notes.append("global_component_coverage_repair=true")
+            telemetry.notes.append(
+                f"repaired_components={','.join(component_repair_ids)}")
         if profile.get("requires_multi_branch") or profile.get("requires_evidence_merge"):
             # A valid ARG model can still collapse two branch capabilities onto
             # one retrieved component. Preserve one executable component per
@@ -239,7 +250,9 @@ class GraphHarnessConstruction(ConstructionMethod):
         telemetry.planning_steps, telemetry.inspected_components = len(blueprint.nodes) + len(blueprint.edges), inspected
         telemetry.notes.append("constraint-aware graph orchestration")
         telemetry.notes.append(f"candidate_search=k{len(candidates)};selected={chosen_strategy}")
-        return self._result(request, model, blueprint, telemetry)
+        result = self._result(request, model, blueprint, telemetry)
+        _validate_global_graph_harness_result(model, selected, result)
+        return result
 
     @staticmethod
     def _candidate_strategies(profile: dict) -> list[str]:
@@ -555,6 +568,138 @@ def _components_for_requirements(request: ConstructionRequest, requirements: lis
             selected.append(component)
             covered.update(gain)
     return selected
+
+
+def _complete_component_selection(
+    request: ConstructionRequest,
+    requirements: list[CapabilityRequirement],
+    selected: list[HarnessNode],
+) -> tuple[list[HarnessNode], list[str]]:
+    """Make the task-to-component mapping total after model suggestions.
+
+    Model-selected components are preferences. Every required capability still
+    needs an executable component so task dependencies can be realized without
+    silently dropping intermediate stages.
+    """
+    required = {requirement.id for requirement in requirements}
+    selected_by_id = {component.id: component for component in selected}
+    covered = {
+        capability
+        for component in selected_by_id.values()
+        for capability in component.capabilities
+        if capability in required
+    }
+    missing = required.difference(covered)
+    if not missing:
+        return list(selected_by_id.values()), []
+
+    realizes = {(edge.source, edge.target)
+                for edge in request.harness.edges if edge.relation == "realizes"}
+    candidates = [
+        node for node in request.harness.nodes
+        if node.kind == "component" and node.id not in selected_by_id
+    ]
+    candidates.sort(key=lambda node: (
+        -sum((capability, node.id) in realizes for capability in missing),
+        node.risk != "low",
+        node.id,
+    ))
+    repaired = []
+    for component in candidates:
+        gain = missing.intersection(component.capabilities)
+        if not gain:
+            continue
+        selected_by_id[component.id] = component
+        repaired.append(component.id)
+        missing.difference_update(gain)
+        if not missing:
+            break
+    if missing:
+        raise ValueError(
+            "global graph cannot realize required capabilities: "
+            + ", ".join(sorted(missing)))
+    return list(selected_by_id.values()), repaired
+
+
+def _validate_global_graph_harness_result(
+    model: ApplicationRequirementModel,
+    selected: list[HarnessNode],
+    result: ConstructionResult,
+) -> None:
+    """Reject executable graphs that lose required tasks or terminal reachability."""
+    task_to_components: dict[str, set[str]] = defaultdict(set)
+    for requirement in model.capability_requirements:
+        component_ids = {
+            component.id
+            for component in selected
+            if requirement.id in component.capabilities
+        }
+        if not component_ids:
+            raise ValueError(
+                f"required task {requirement.task_id} has no component for "
+                f"capability {requirement.id}")
+        task_to_components[requirement.task_id].update(component_ids)
+
+    app_by_blueprint = defaultdict(list)
+    for node in result.application.nodes:
+        app_by_blueprint[node.realizes_blueprint_node].append(node.id)
+    task_to_app = {
+        task_id: {
+            app_id
+            for component_id in component_ids
+            for app_id in app_by_blueprint.get(f"req_{component_id}", [])
+        }
+        for task_id, component_ids in task_to_components.items()
+    }
+    missing_tasks = [
+        task_id for task_id, app_ids in task_to_app.items() if not app_ids
+    ]
+    if missing_tasks:
+        raise ValueError(
+            "required tasks were not realized as executable agents: "
+            + ", ".join(sorted(missing_tasks)))
+
+    executable_edges = {
+        (edge.source, edge.target)
+        for edge in result.application.edges
+    }
+    missing_dependencies = []
+    for dependency in model.task_dependencies:
+        source_agents = task_to_app.get(dependency.source, set())
+        target_agents = task_to_app.get(dependency.target, set())
+        if not any((source, target) in executable_edges
+                   for source in source_agents for target in target_agents):
+            missing_dependencies.append(
+                f"{dependency.source}->{dependency.target}")
+    if missing_dependencies:
+        raise ValueError(
+            "required task dependencies were not realized: "
+            + ", ".join(missing_dependencies))
+
+    terminal_task = next(
+        (
+            task.id for task in reversed(model.tasks)
+            if task.id.casefold() in {"answer", "report", "emit"}
+            or any(token in task.id.casefold()
+                   for token in ("answer", "report", "emit"))
+        ),
+        model.tasks[-1].id,
+    )
+    terminal_agents = task_to_app.get(terminal_task, set())
+    outgoing = defaultdict(list)
+    for source, target in executable_edges:
+        outgoing[source].append(target)
+    reachable = set(result.application.entrypoints)
+    queue = deque(reachable)
+    while queue:
+        source = queue.popleft()
+        for target in outgoing[source]:
+            if target not in reachable:
+                reachable.add(target)
+                queue.append(target)
+    if not terminal_agents.intersection(reachable):
+        raise ValueError(
+            f"terminal task {terminal_task} is not reachable from graph entrypoints")
 
 
 def _multibranch_grounding_incomplete(request: ConstructionRequest,
