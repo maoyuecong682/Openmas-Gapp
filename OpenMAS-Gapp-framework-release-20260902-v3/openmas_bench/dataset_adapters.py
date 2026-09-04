@@ -436,6 +436,53 @@ class DatasetAdapter:
     execution: ExecutionAdapter
 
     @property
+    def remote_spec(self) -> dict[str, Any] | None:
+        """Return the remote row source, when this adapter supports one.
+
+        Remote sources are deliberately metadata only.  The row fetcher owns
+        transport and normalization so importing the benchmark never creates a
+        Hugging Face datasets cache.
+        """
+        specs = {
+            "MedQA": {
+                "dataset": "openlifescienceai/medqa",
+                "config": "default",
+                "split": "test",
+                "kind": "medqa",
+            },
+            "MedMCQA": {
+                "dataset": "openlifescienceai/medmcqa",
+                "config": "default",
+                "split": "validation",
+                "kind": "medmcqa",
+            },
+            "PubMedQA": {
+                "dataset": "qiaojin/PubMedQA",
+                "config": "pqa_labeled",
+                "split": "train",
+                "kind": "pubmedqa",
+            },
+            "MMLU-Medical": {
+                "dataset": "cais/mmlu",
+                "configs": (
+                    "anatomy",
+                    "clinical_knowledge",
+                    "college_biology",
+                    "college_medicine",
+                    "medical_genetics",
+                    "professional_medicine",
+                    "human_aging",
+                    "nutrition",
+                    "virology",
+                ),
+                "split": "test",
+                "kind": "mmlu_medical",
+            },
+        }
+        spec = specs.get(self.dataset_id)
+        return dict(spec) if spec else None
+
+    @property
     def task_profile(self) -> dict[str, Any]:
         """Answer-independent prior used to specialize harness construction."""
         profiles = {
@@ -478,6 +525,12 @@ class DatasetAdapter:
             "PubMedQA": {"task_family": "biomedical_evidence", "requires_numeric_tool": False,
                          "requires_multi_branch": True, "requires_evidence_merge": True,
                          "requires_constraint_gate": True},
+            "MedMCQA": {"task_family": "medical_multiple_choice", "requires_numeric_tool": False,
+                         "requires_multi_branch": False, "requires_evidence_merge": False,
+                         "requires_constraint_gate": True},
+            "MMLU-Medical": {"task_family": "medical_multiple_choice", "requires_numeric_tool": False,
+                              "requires_multi_branch": False, "requires_evidence_merge": False,
+                              "requires_constraint_gate": True},
             "FinQA": {"task_family": "financial_program", "requires_numeric_tool": True,
                        "requires_multi_branch": False, "requires_evidence_merge": False,
                        "requires_constraint_gate": False},
@@ -522,8 +575,10 @@ DATASET_ADAPTERS: dict[str, DatasetAdapter] = {
     "logiqa": DatasetAdapter("LogiQA", "q2_datasets/normalized/logiqa.jsonl", "test", "Apache-2.0", _template("LogiQA", "logic", "sequential", "Solve the logical reasoning question by analyzing the passage, comparing the choices, verifying the inference, and returning one option.", [("interpret", "Interpret the logical passage"), ("reason", "Reason over the argument"), ("verify", "Verify the inference"), ("answer", "Return one option")]), MultipleChoiceAdapter()),
     "hotpotqa": DatasetAdapter("HotpotQA", "q2_datasets/normalized/hotpotqa.jsonl", "validation", "CC-BY-SA-4.0", _template("HotpotQA", "open_domain", "multi_branch", "Answer the multi-hop question by retrieving supporting evidence from both hops, synthesizing the evidence, verifying citations, and returning a concise answer.", [("retrieve_a", "Retrieve first-hop evidence"), ("retrieve_b", "Retrieve second-hop evidence"), ("synthesize", "Synthesize both evidence streams"), ("verify", "Verify supporting facts"), ("answer", "Return the answer")]), TextF1Adapter()),
     "drop": DatasetAdapter("DROP", "q2_datasets/normalized/drop.jsonl", "validation", "CC-BY-SA-4.0", _template("DROP", "reading_math", "sequential", "Answer the reading-comprehension question by extracting relevant numbers or dates, performing the required discrete operation, verifying the result, and returning the answer.", [("retrieve", "Retrieve relevant passage evidence"), ("extract", "Extract numbers or dates"), ("compute", "Perform the required operation"), ("verify", "Verify the result"), ("answer", "Return the answer")]), DropAdapter()),
-    "medqa": DatasetAdapter("MedQA", "q2_datasets/normalized/medqa.jsonl", "test", "unverified", _template("MedQA", "medicine", "constraint_heavy", "Answer the clinical question using evidence retrieval, differential reasoning, safety checking, and mandatory professional review before returning one option.", [("retrieve", "Retrieve clinical evidence"), ("reason", "Reason over the clinical case"), ("safety", "Check safety and contraindications"), ("review", "Obtain professional review"), ("answer", "Return one option")], [("human_review", "human_approval", "answer", "required")]), MultipleChoiceAdapter()),
-    "pubmedqa": DatasetAdapter("PubMedQA", "q2_datasets/normalized/pubmedqa.jsonl", "pilot", "MIT; verify source terms", _template("PubMedQA", "biomedical", "constraint_heavy", "Answer the biomedical yes/no/maybe question by retrieving the relevant evidence, distinguishing findings from background, checking uncertainty, and returning exactly yes, no, or maybe.", [("retrieve", "Retrieve relevant biomedical evidence"), ("interpret", "Interpret the study findings"), ("uncertainty", "Check uncertainty and alternative explanations"), ("review", "Review the evidence chain"), ("answer", "Return yes, no, or maybe")], [("evidence_review", "evidence_approval", "answer", "required")]), PubMedQAAdapter()),
+    "medqa": DatasetAdapter("MedQA", "q9_datasets/normalized/medqa.jsonl", "test", "unverified", _template("MedQA", "medicine", "constraint_heavy", "Answer the clinical question using evidence retrieval, differential reasoning, safety checking, and mandatory professional review before returning one option.", [("retrieve", "Retrieve clinical evidence"), ("reason", "Reason over the clinical case"), ("safety", "Check safety and contraindications"), ("review", "Obtain professional review"), ("answer", "Return one option")], [("human_review", "human_approval", "answer", "required")]), MultipleChoiceAdapter()),
+    "medmcqa": DatasetAdapter("MedMCQA", "q9_datasets/normalized/medmcqa.jsonl", "validation", "CC-BY-SA-4.0; verify source terms", _template("MedMCQA", "medicine", "constraint_heavy", "Answer the medical multiple-choice question using evidence retrieval, differential reasoning, safety checking, and mandatory professional review before returning one option.", [("retrieve", "Retrieve medical evidence"), ("reason", "Reason over the clinical question"), ("safety", "Check safety and contraindications"), ("review", "Obtain professional review"), ("answer", "Return one option")], [("human_review", "human_approval", "answer", "required")]), MultipleChoiceAdapter()),
+    "pubmedqa": DatasetAdapter("PubMedQA", "q9_datasets/normalized/pubmedqa.jsonl", "pilot", "MIT; verify source terms", _template("PubMedQA", "biomedical", "constraint_heavy", "Answer the biomedical yes/no/maybe question by retrieving the relevant evidence, distinguishing findings from background, checking uncertainty, and returning exactly yes, no, or maybe.", [("retrieve", "Retrieve relevant biomedical evidence"), ("interpret", "Interpret the study findings"), ("uncertainty", "Check uncertainty and alternative explanations"), ("review", "Review the evidence chain"), ("answer", "Return yes, no, or maybe")], [("evidence_review", "evidence_approval", "answer", "required")]), PubMedQAAdapter()),
+    "mmlu_medical": DatasetAdapter("MMLU-Medical", "q9_datasets/normalized/mmlu_medical.jsonl", "test", "MIT", _template("MMLU-Medical", "medicine", "constraint_heavy", "Answer the medical knowledge question using evidence retrieval, differential reasoning, safety checking, and mandatory professional review before returning one option.", [("retrieve", "Retrieve medical evidence"), ("reason", "Reason over the medical choices"), ("safety", "Check safety and contraindications"), ("review", "Obtain professional review"), ("answer", "Return one option")], [("human_review", "human_approval", "answer", "required")]), MultipleChoiceAdapter()),
     "finqa": DatasetAdapter("FinQA", "q2_datasets/normalized/finqa.jsonl", "pilot", "CC-BY-4.0", _template("FinQA", "finance", "sequential", "Answer the financial question by locating the relevant table values, selecting the arithmetic program, executing the calculation, verifying units, and returning the numeric result.", [("retrieve", "Retrieve relevant report and table evidence"), ("select", "Select the relevant values and operation"), ("execute", "Execute the arithmetic program"), ("verify", "Verify units and calculation"), ("answer", "Return the numeric result")]), FinQAAdapter()),
     "musique": DatasetAdapter("MuSiQue", "q2_datasets/normalized/musique.jsonl", "pilot", "CC-BY-4.0", _template("MuSiQue", "open_domain", "multi_branch", "Answer the controlled multi-hop question by retrieving linked evidence, following the annotated reasoning chain, merging the branches, verifying support, and returning the answer.", [("retrieve_a", "Retrieve first evidence branch"), ("retrieve_b", "Retrieve linked second evidence branch"), ("merge", "Merge the multi-hop evidence"), ("verify", "Verify the reasoning chain"), ("answer", "Return the answer")]), TextF1Adapter()),
     "strategyqa": DatasetAdapter("StrategyQA", "q2_datasets/normalized/strategyqa.jsonl", "pilot", "verify", _template("StrategyQA", "commonsense", "multi_branch", "Answer the implicit multi-hop question by grounding the requirement, decomposing it into subquestions, checking the supporting facts, and returning yes or no.", [("ground", "Ground the question and target"), ("decompose", "Decompose into subquestions"), ("reason", "Reason over the supporting facts"), ("verify", "Verify the conclusion"), ("answer", "Return yes or no")]), YesNoAdapter()),

@@ -144,6 +144,8 @@ class GraphHarnessEngine:
             "resource_audit": (task_result.metadata or {}).get("resource_audit", {}),
             "tool_audit": (task_result.metadata or {}).get("finqa_tool_audit", {}),
         }
+        if isinstance(row.get("remote"), dict):
+            audit["remote_source"] = dict(row["remote"])
         return EngineRunResult(
             dataset.dataset_id, case.case_id, row.get("id"),
             intervention or construction.application.metadata.get("variant") or construction.method,

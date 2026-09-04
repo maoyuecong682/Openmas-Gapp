@@ -12,6 +12,7 @@ from .engine import GraphHarnessEngine
 from .evaluate import evaluate_construction, evaluate_spec
 from .io import load_construction_case, load_construction_result, load_package, save_construction_result, save_spec, write_json
 from .llm import DeterministicAdapter, LLMConfig, OpenAICompatibleAdapter
+from .remote_datasets import DEFAULT_ROWS_ENDPOINT, load_remote_row
 
 
 def main() -> None:
@@ -36,13 +37,19 @@ def main() -> None:
     run = sub.add_parser("run", help="construct and execute one dataset task through GraphHarnessEngine")
     run.add_argument("--dataset", required=True)
     run.add_argument("--data-root", required=True)
+    run.add_argument("--source", choices=["local", "remote"], default="local",
+                     help="local reads normalized JSONL; remote fetches one source row without a local dataset cache")
     run.add_argument("--row-index", type=int, default=0)
+    run.add_argument("--remote-endpoint", default=DEFAULT_ROWS_ENDPOINT,
+                     help="Hugging Face datasets-server rows endpoint used with --source remote")
+    run.add_argument("--remote-timeout", type=int, default=30,
+                     help="per-request timeout in seconds for --source remote")
     run.add_argument("--seed", type=int, default=11)
     run.add_argument("--intervention", default="full_graph_harness")
     run.add_argument("--provider", choices=["deterministic", "openai_compatible"], default="deterministic")
-    run.add_argument("--base-url", default="https://dashscope.aliyuncs.com/compatible-mode/v1")
-    run.add_argument("--model", default="qwen-plus")
-    run.add_argument("--api-key-env", default="DASHSCOPE_API_KEY")
+    run.add_argument("--base-url", default="https://api.deepseek.com")
+    run.add_argument("--model", default="deepseek-chat")
+    run.add_argument("--api-key-env", default="OPENMAS_LLM_API_KEY")
     run.add_argument("--output", required=True)
     args = parser.parse_args()
     if args.command == "build":
@@ -76,8 +83,16 @@ def main() -> None:
         adapter = (DeterministicAdapter(config) if args.provider == "deterministic"
                    else OpenAICompatibleAdapter(config))
         data_root = Path(args.data_root).resolve()
-        rows = load_normalized_rows(data_root, dataset, args.row_index + 1)
-        row = rows[args.row_index]
+        if args.source == "remote":
+            row = load_remote_row(
+                dataset,
+                args.row_index,
+                endpoint=args.remote_endpoint,
+                timeout_seconds=args.remote_timeout,
+            )
+        else:
+            rows = load_normalized_rows(data_root, dataset, args.row_index + 1)
+            row = rows[args.row_index]
         case = build_dataset_case(dataset, row, args.row_index)
         result = GraphHarnessEngine(adapter, data_root).run_case(
             dataset, row, case, seed=args.seed, intervention=args.intervention)

@@ -2,7 +2,7 @@
 # in the current shell. Do not put real keys in this template.
 
 # Aliyun DashScope / Bailian compatible endpoint, used by existing Q1/Q3 real scripts.
-# $env:DASHSCOPE_API_KEY = "replace-with-real-key"
+# $env:DASHSCOPE_API_KEY = "sk-ws-H.PMIMMXH.auza.MEQCIDOHu2ENoABh2JkQUNmE0GRQgFBQB4ske-F6RWcLM4XSAiBhnHb5S-65mdYqUC5Jc4aQBusH8BFkNK_ECCtmHvEFIQ"
 
 # Generic OpenAI-compatible endpoint, used by run_q2_cross_dataset.py defaults.
 # $env:Q1_LLM_API_KEY = "replace-with-real-key"

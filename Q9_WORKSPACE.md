@@ -1,36 +1,49 @@
 # OpenMAS-Gapp Q9 Workspace
 
 Q9 is the Medical Application Case Study from `OpenMAS-Gapp实验方案.md`.
-The immediate runnable approximation uses the existing medical adapters:
-`MedQA` and `PubMedQA`.
+The Q9 data space is independent and uses `q9_datasets` as the canonical
+storage root.
 
 ## Roots
 
 - Workspace root: `D:\Openmas-Gapp`
 - Code root: `D:\Openmas-Gapp\OpenMAS-Gapp-framework-release-20260902-v3`
 - Dataset root passed to CLI / engine: `D:\Openmas-Gapp`
-- Q9 dataset storage: `D:\Openmas-Gapp\q2_datasets`
-- Q9 normalized rows: `D:\Openmas-Gapp\q2_datasets\normalized`
-- Q9 raw medical rows: `D:\Openmas-Gapp\q2_datasets\raw\medical`
+- Q9 dataset storage: `D:\Openmas-Gapp\q9_datasets`
+- Q9 normalized rows: `D:\Openmas-Gapp\q9_datasets\normalized`
+- Q9 raw medical rows: `D:\Openmas-Gapp\q9_datasets\raw\medical`
 - Hugging Face cache: `D:\Openmas-Gapp\.cache\huggingface`
 - Output root: `D:\Openmas-Gapp\outputs\q9_medical`
 - Logs: `D:\Openmas-Gapp\logs\q9_medical`
 - Temporary files: `D:\Openmas-Gapp\tmp\q9_medical`
 
-## Expected Dataset Files
+Compatibility alias:
 
-The current code expects these normalized JSONL files for a Q9 smoke run:
+- `D:\Openmas-Gapp\q2_datasets` is a junction to `D:\Openmas-Gapp\q9_datasets`
 
-- `D:\Openmas-Gapp\q2_datasets\normalized\medqa.jsonl`
-- `D:\Openmas-Gapp\q2_datasets\normalized\pubmedqa.jsonl`
+## Q9 Datasets
 
-Each row should expose at least:
+Q9 needs four medical datasets:
+
+- `MedQA`
+- `MedMCQA`
+- `PubMedQA`
+- `MMLU 医学子集`
+
+Planned normalized files:
+
+- `D:\Openmas-Gapp\q9_datasets\normalized\medqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\normalized\medmcqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\normalized\pubmedqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\normalized\mmlu_medical.jsonl`
+
+Each normalized row should expose at least:
 
 - `id`
 - `question`
 - `answer`
 - `context`
-- `choices` when the dataset is multiple choice
+- `choices` for multiple-choice items
 - `raw` with the original dataset row
 
 ## Environment Setup
@@ -50,6 +63,16 @@ D:\Openmas-Gapp\secrets\q9_api_keys.local.ps1
 
 Keep real API keys in the shell or in that local secrets file, not in source
 docs.
+
+## Next Steps
+
+1. Keep `q9_datasets` as the canonical storage root.
+2. Add raw dataset folders for the four Q9 datasets under
+   `q9_datasets\raw\medical`.
+3. Normalize the four datasets into `q9_datasets\normalized`.
+4. Add or map the missing medical adapters for `MedMCQA` and
+   `MMLU 医学子集`.
+5. Run one-row smoke checks for each dataset once the normalized files exist.
 
 ## Minimal Q9 Run Shape
 

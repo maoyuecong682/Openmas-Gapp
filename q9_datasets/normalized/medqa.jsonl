@@ -1,0 +1,1 @@
+{"id":"smoke_medqa_0000","question":"A patient has a bacterial infection. Which treatment class is used to kill or inhibit bacteria?","answer":"antibiotics","context":"Smoke row for local pipeline validation only.","choices":["antibiotics","antivirals","antihistamines","anticoagulants"],"raw":{"source":"local_smoke","note":"not formal benchmark data"}}

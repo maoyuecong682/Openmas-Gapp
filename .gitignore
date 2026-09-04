@@ -8,3 +8,4 @@ q2_datasets/
 *.pyc
 __pycache__/
 .pytest_cache/
+tools/

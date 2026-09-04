@@ -168,7 +168,7 @@ def _is_qualified_row(adapter: DatasetAdapter, row: dict[str, Any]) -> bool:
     # Code benchmarks are scored by sandbox execution and intentionally have
     # no textual gold answer in the normalized row.
     if adapter.execution.metric_name not in {"unit_test_pass", "swebench_resolved"} \
-            and not str(answer or "").strip():
+            and (answer is None or (isinstance(answer, str) and not answer.strip())):
         return False
     if adapter.dataset_id == "FinQA":
         raw = row.get("raw") or {}
