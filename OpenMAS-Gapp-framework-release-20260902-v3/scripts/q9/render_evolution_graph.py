@@ -11,11 +11,16 @@ from typing import Any
 from PIL import Image, ImageDraw, ImageFont
 
 
+CANVAS_W = 1920
+CANVAS_H = 1080
 PANEL_W = 430
-PANEL_H = 450
-CANVAS_W = PANEL_W * 4 + 5 * 24
-CANVAS_H = PANEL_H + 70
-RADIUS = 25
+PANEL_H = 930
+PANEL_GAP = 24
+PANEL_X0 = 40
+PANEL_Y0 = 70
+RADIUS = 31
+INPUT_W = 150
+INPUT_H = 72
 
 COLORS = {
     "input": ("#fff7ed", "#ea580c"),
@@ -43,13 +48,13 @@ def main() -> None:
     fonts = _fonts()
 
     for index, panel in enumerate(panels):
-        x = 24 + index * (PANEL_W + 24)
-        _draw_panel(draw, x, 48, panel, fonts)
+        x = PANEL_X0 + index * (PANEL_W + PANEL_GAP)
+        _draw_panel(draw, x, PANEL_Y0, panel, fonts)
         if index < len(panels) - 1:
-            _draw_transition(draw, x + PANEL_W + 4, 245, fonts["large"])
+            _draw_transition(draw, x + PANEL_W + 4, PANEL_Y0 + PANEL_H / 2, fonts["large"])
 
     title = f"Q9 MAS Graph Evolution | {record.get('dataset', 'dataset')}"
-    draw.text((24, 15), title, fill="#0f172a", font=fonts["title"])
+    draw.text((24, 18), title, fill="#0f172a", font=fonts["title"])
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output, "PNG")
@@ -67,20 +72,18 @@ def _build_panels(record: dict[str, Any]) -> list[dict[str, Any]]:
     app_nodes = [node for node in application.get("nodes", []) if isinstance(node, dict)]
     app_edges = [edge for edge in application.get("edges", []) if isinstance(edge, dict)]
 
-    control_nodes = [
-        node for node in app_nodes if str(node.get("kind")) == "control"
-    ]
-    control_id = str(control_nodes[0].get("id")) if control_nodes else "control_review"
+    control_nodes = [node for node in app_nodes if str(node.get("kind")) == "control"]
     control_label = _short(
-        control_nodes[0].get("implementation_ref", "review_control")
-        if control_nodes else "review_control",
+        str(control_nodes[0].get("implementation_ref", "review_control")).replace("component_", "").replace("_", " ")
+        if control_nodes
+        else "review_control",
         24,
     )
 
     input_nodes = [
-        {"id": "question", "label": "Question\n" + _short(question, 54), "kind": "input"},
+        {"id": "question", "label": "\n".join(["Question", *_wrap(question, 19, 4)]), "kind": "input"},
         {"id": "context", "label": "Context / choices", "kind": "input"},
-        {"id": "output", "label": "Required output\n" + _short(task_labels[task_ids[-1]], 30), "kind": "input"},
+        {"id": "output", "label": "\n".join(["Required output", *_wrap(task_labels[task_ids[-1]], 18, 2)]), "kind": "input"},
         {"id": "case", "label": f"{dataset}\ncase input", "kind": "task"},
     ]
     input_edges = [
@@ -89,31 +92,23 @@ def _build_panels(record: dict[str, Any]) -> list[dict[str, Any]]:
         ("output", "case", "contract"),
     ]
 
-    requirement_nodes = [
-        {"id": task_id, "label": task_labels[task_id], "kind": "task"}
-        for task_id in task_ids
-    ]
+    requirement_nodes = [{"id": task_id, "label": task_labels[task_id], "kind": "task"} for task_id in task_ids]
     requirement_edges = [
         {"source": source, "target": target, "relation": "dependency"}
         for source, target in dependency_edges
     ]
 
-    blueprint_nodes = [
-        {"id": task_id, "label": task_labels[task_id], "kind": "task"}
-        for task_id in task_ids
-    ]
+    blueprint_nodes = [{"id": task_id, "label": task_labels[task_id], "kind": "task"} for task_id in task_ids]
     blueprint_nodes.extend(
         {
             "id": f"req_{task_id}",
-            "label": f"req_{task_id}",
+            "label": f"req {task_labels[task_id].lower()}",
             "kind": "component_requirement",
         }
         for task_id in task_ids
     )
     if control_nodes:
-        blueprint_nodes.append(
-            {"id": "blueprint_control", "label": control_label, "kind": "control"}
-        )
+        blueprint_nodes.append({"id": "blueprint_control", "label": control_label, "kind": "control"})
     blueprint_edges = [
         {"source": source, "target": target, "relation": "precedes"}
         for source, target in dependency_edges
@@ -182,18 +177,11 @@ def _draw_panel(
     panel: dict[str, Any],
     fonts: dict[str, ImageFont.FreeTypeFont],
 ) -> None:
-    draw.rounded_rectangle(
-        (x, y, x + PANEL_W, y + PANEL_H),
-        radius=10,
-        fill="#ffffff",
-        outline="#cbd5e1",
-        width=2,
-    )
+    draw.rounded_rectangle((x, y, x + PANEL_W, y + PANEL_H), radius=10, fill="#ffffff", outline="#cbd5e1", width=2)
     draw.text((x + 16, y + 14), panel["title"], fill="#0f172a", font=fonts["heading"])
-    subtitle = _wrap(panel["subtitle"], 37)
     draw.multiline_text(
         (x + 16, y + 45),
-        "\n".join(subtitle),
+        "\n".join(_wrap(panel["subtitle"], 37)),
         fill="#64748b",
         font=fonts["small"],
         spacing=2,
@@ -201,8 +189,7 @@ def _draw_panel(
 
     nodes = panel["nodes"]
     edges = panel["edges"]
-    node_ids = [str(node["id"]) for node in nodes]
-    positions = _layout(node_ids, edges, x + 30, y + 118)
+    positions = _layout([str(node["id"]) for node in nodes], edges, x + 30, y + 118)
     by_id = {str(node["id"]): node for node in nodes}
 
     for edge in edges:
@@ -215,15 +202,9 @@ def _draw_panel(
             target = str(edge[1])
             relation = str(edge[2]) if len(edge) > 2 else ""
         if source in positions and target in positions:
-            _draw_edge(
-                draw,
-                positions[source],
-                positions[target],
-                relation,
-                fonts["edge"],
-            )
+            _draw_edge(draw, positions[source], positions[target], relation, fonts["edge"])
 
-    for node_id in node_ids:
+    for node_id in [str(node["id"]) for node in nodes]:
         _draw_node(draw, by_id[node_id], positions[node_id], fonts)
 
 
@@ -237,35 +218,24 @@ def _draw_node(
     kind = str(node.get("kind") or "default")
     fill, stroke = COLORS.get(kind, COLORS["default"])
     if kind == "input":
-        draw.rounded_rectangle(
-            (x - 52, y - 28, x + 52, y + 28),
-            radius=8,
-            fill=fill,
-            outline=stroke,
-            width=2,
-        )
+        draw.rounded_rectangle((x - INPUT_W / 2, y - INPUT_H / 2, x + INPUT_W / 2, y + INPUT_H / 2), radius=10, fill=fill, outline=stroke, width=2)
+        labels = _wrap(str(node.get("label") or node.get("id")), 18, 4)
+        node_font = fonts["node"]
+    elif kind == "component_requirement":
+        draw.ellipse((x - RADIUS, y - RADIUS, x + RADIUS, y + RADIUS), fill=fill, outline=stroke, width=2)
+        labels = _wrap(str(node.get("label") or node.get("id")), 8, 2)
+        node_font = fonts["small"]
     else:
-        draw.ellipse(
-            (x - RADIUS, y - RADIUS, x + RADIUS, y + RADIUS),
-            fill=fill,
-            outline=stroke,
-            width=2,
-        )
-    labels = _wrap(str(node.get("label") or node.get("id")), 15 if kind == "input" else 17)[:3]
-    heights = []
-    for label in labels:
-        bounds = draw.textbbox((0, 0), label, font=fonts["node"])
-        heights.append(bounds[3] - bounds[1])
+        draw.ellipse((x - RADIUS, y - RADIUS, x + RADIUS, y + RADIUS), fill=fill, outline=stroke, width=2)
+        labels = _wrap(str(node.get("label") or node.get("id")), 14, 3)
+        node_font = fonts["node"]
+
+    heights = [draw.textbbox((0, 0), label, font=node_font)[3] - draw.textbbox((0, 0), label, font=node_font)[1] for label in labels]
     total = sum(heights) + 2 * max(0, len(labels) - 1)
     current_y = y - total / 2
     for index, label in enumerate(labels):
-        bounds = draw.textbbox((0, 0), label, font=fonts["node"])
-        draw.text(
-            (x - (bounds[2] - bounds[0]) / 2, current_y),
-            label,
-            fill="#0f172a",
-            font=fonts["node"],
-        )
+        bounds = draw.textbbox((0, 0), label, font=node_font)
+        draw.text((x - (bounds[2] - bounds[0]) / 2, current_y), label, fill="#0f172a", font=node_font)
         current_y += heights[index] + 2
 
 
@@ -291,42 +261,29 @@ def _draw_edge(
     draw.polygon(
         [
             (ex, ey),
-            (
-                ex - ux * arrow_size + px * arrow_width,
-                ey - uy * arrow_size + py * arrow_width,
-            ),
-            (
-                ex - ux * arrow_size - px * arrow_width,
-                ey - uy * arrow_size - py * arrow_width,
-            ),
+            (ex - ux * arrow_size + px * arrow_width, ey - uy * arrow_size + py * arrow_width),
+            (ex - ux * arrow_size - px * arrow_width, ey - uy * arrow_size - py * arrow_width),
         ],
         fill="#475569",
     )
     if relation:
         label = _short(relation, 16)
         bounds = draw.textbbox((0, 0), label, font=font)
-        draw.text(
-            (
-                (start[0] + end[0]) / 2 - (bounds[2] - bounds[0]) / 2,
-                (start[1] + end[1]) / 2 - 18,
-            ),
-            label,
-            fill="#64748b",
-            font=font,
+        width = bounds[2] - bounds[0]
+        height = bounds[3] - bounds[1]
+        mx, my = (start[0] + end[0]) / 2, (start[1] + end[1]) / 2
+        draw.rounded_rectangle(
+            (mx - width / 2 - 5, my - height / 2 - 3, mx + width / 2 + 5, my + height / 2 + 3),
+            radius=4,
+            fill="#ffffff",
+            outline="#ffffff",
         )
+        draw.text((mx - width / 2, my - height / 2), label, fill="#64748b", font=font)
 
 
-def _draw_transition(
-    draw: ImageDraw.ImageDraw,
-    x: int,
-    y: int,
-    font: ImageFont.FreeTypeFont,
-) -> None:
+def _draw_transition(draw: ImageDraw.ImageDraw, x: int, y: float, font: ImageFont.FreeTypeFont) -> None:
     draw.line((x, y, x + 30, y), fill="#0f766e", width=3)
-    draw.polygon(
-        [(x + 38, y), (x + 28, y - 6), (x + 28, y + 6)],
-        fill="#0f766e",
-    )
+    draw.polygon([(x + 38, y), (x + 28, y - 6), (x + 28, y + 6)], fill="#0f766e")
     draw.text((x + 2, y + 10), "compile", fill="#0f766e", font=font)
 
 
@@ -363,21 +320,25 @@ def _layout(
     for node_id in node_ids:
         by_level[levels[node_id]].append(node_id)
     max_level = max(by_level, default=0)
-    positions = {}
+    positions: dict[str, tuple[float, float]] = {}
+    usable_w = PANEL_W - 140
+    usable_h = PANEL_H - 180
     for level in range(max_level + 1):
         column = by_level[level]
-        x = x0 + level * max(78, (PANEL_W - 70) // max(1, max_level))
-        step = min(84, 270 // max(1, len(column)))
-        start = y0 + 30 + max(0, (270 - step * (len(column) - 1)) / 2)
+        x = x0 + 45 + level * (usable_w / max(1, max_level))
+        gap = min(96, max(62, usable_h / max(1, len(column) - 1)))
+        total = gap * (len(column) - 1)
+        start = y0 + 40 + max(0, (usable_h - total) / 2)
         for index, node_id in enumerate(column):
-            positions[node_id] = (x, start + index * step)
+            positions[node_id] = (x, start + index * gap)
     return positions
 
 
 def _circle_layout(node_ids: list[str], x0: int, y0: int) -> dict[str, tuple[float, float]]:
     count = max(1, len(node_ids))
-    center = (x0 + 145, y0 + 135)
-    radius = min(105, 30 + count * 9)
+    center = (x0 + 45 + (PANEL_W - 140) / 2, y0 + 40 + (PANEL_H - 180) / 2)
+    radius = min((PANEL_W - 170) / 2, (PANEL_H - 240) / 2)
+    radius = max(96, radius)
     return {
         node_id: (
             center[0] + radius * math.cos(2 * math.pi * index / count - math.pi / 2),
@@ -399,7 +360,7 @@ def _task_label(task_id: str) -> str:
         "reason": "Reason",
         "interpret": "Interpret",
         "safety": "Safety",
-        "uncertainty": "Uncertainty",
+        "uncertainty": "Uncertain",
         "review": "Review",
         "answer": "Answer",
     }.get(task_id, task_id)
@@ -429,31 +390,40 @@ def _question(record: dict[str, Any]) -> str:
 
 
 def _fonts() -> dict[str, ImageFont.FreeTypeFont]:
-    paths = [
-        r"C:\Windows\Fonts\arial.ttf",
-        r"C:\Windows\Fonts\segoeui.ttf",
-    ]
+    paths = [r"C:\Windows\Fonts\arial.ttf", r"C:\Windows\Fonts\segoeui.ttf"]
     selected = next((path for path in paths if Path(path).exists()), None)
     if selected:
         return {
-            "title": ImageFont.truetype(selected, 22),
-            "heading": ImageFont.truetype(selected, 16),
-            "large": ImageFont.truetype(selected, 12),
-            "small": ImageFont.truetype(selected, 11),
-            "node": ImageFont.truetype(selected, 11),
-            "edge": ImageFont.truetype(selected, 9),
+            "title": ImageFont.truetype(selected, 30),
+            "heading": ImageFont.truetype(selected, 18),
+            "large": ImageFont.truetype(selected, 14),
+            "small": ImageFont.truetype(selected, 13),
+            "node": ImageFont.truetype(selected, 14),
+            "edge": ImageFont.truetype(selected, 10),
         }
     fallback = ImageFont.load_default()
     return {key: fallback for key in ("title", "heading", "large", "small", "node", "edge")}
 
 
-def _wrap(value: str, width: int) -> list[str]:
-    return textwrap.wrap(value, width=width, break_long_words=False) or [value]
+def _wrap(value: str, width: int, limit: int = 3) -> list[str]:
+    text = str(value).replace("\r", " ").strip()
+    if not text:
+        return [""]
+    lines: list[str] = []
+    for part in text.splitlines():
+        chunk = textwrap.fill(part.replace("_", " ").replace("-", " "), width=width, break_long_words=False, break_on_hyphens=False)
+        lines.extend(chunk.splitlines())
+    if not lines:
+        lines = [text]
+    if len(lines) > limit:
+        lines = lines[:limit]
+        lines[-1] = lines[-1][: max(3, width - 3)] + "..." if len(lines[-1]) > width else lines[-1]
+    return lines
 
 
 def _short(value: Any, limit: int) -> str:
-    value = str(value)
-    return value if len(value) <= limit else value[: limit - 3] + "..."
+    text = str(value)
+    return text if len(text) <= limit else text[: limit - 3] + "..."
 
 
 if __name__ == "__main__":

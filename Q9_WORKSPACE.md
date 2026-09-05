@@ -12,6 +12,7 @@ storage root.
 - Q9 dataset storage: `D:\Openmas-Gapp\q9_datasets`
 - Q9 normalized rows: `D:\Openmas-Gapp\q9_datasets\normalized`
 - Q9 raw medical rows: `D:\Openmas-Gapp\q9_datasets\raw\medical`
+- Q9 pilot rows: `D:\Openmas-Gapp\q9_datasets\pilot`
 - Hugging Face cache: `D:\Openmas-Gapp\.cache\huggingface`
 - Output root: `D:\Openmas-Gapp\outputs\q9_medical`
 - Logs: `D:\Openmas-Gapp\logs\q9_medical`
@@ -23,21 +24,30 @@ Compatibility alias:
 
 ## Q9 Datasets
 
-Q9 needs four medical datasets:
+Q9 now uses four medical datasets:
 
 - `MedQA`
 - `MedMCQA`
 - `PubMedQA`
-- `MMLU 医学子集`
+- `MMLU medical subset`
 
-Planned normalized files:
+Current local files:
 
+- `D:\Openmas-Gapp\q9_datasets\raw\medical\medqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\raw\medical\medmcqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\raw\medical\pubmedqa.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\raw\medical\mmlu_medical.jsonl`
 - `D:\Openmas-Gapp\q9_datasets\normalized\medqa.jsonl`
 - `D:\Openmas-Gapp\q9_datasets\normalized\medmcqa.jsonl`
 - `D:\Openmas-Gapp\q9_datasets\normalized\pubmedqa.jsonl`
 - `D:\Openmas-Gapp\q9_datasets\normalized\mmlu_medical.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\pilot\medqa_pilot.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\pilot\medmcqa_pilot.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\pilot\pubmedqa_pilot.jsonl`
+- `D:\Openmas-Gapp\q9_datasets\pilot\mmlu_medical_pilot.jsonl`
 
-Each normalized row should expose at least:
+These files are frozen local samples for the Q9 medical workflow. Each
+normalized row should expose at least:
 
 - `id`
 - `question`
@@ -67,12 +77,10 @@ docs.
 ## Next Steps
 
 1. Keep `q9_datasets` as the canonical storage root.
-2. Add raw dataset folders for the four Q9 datasets under
-   `q9_datasets\raw\medical`.
-3. Normalize the four datasets into `q9_datasets\normalized`.
-4. Add or map the missing medical adapters for `MedMCQA` and
-   `MMLU 医学子集`.
-5. Run one-row smoke checks for each dataset once the normalized files exist.
+2. Keep the four medical adapters aligned with the normalized row contract.
+3. Run one-row smoke checks for each dataset when the current samples change.
+4. Expand the frozen rows toward the full public splits only if the run plan
+   needs publication-grade evaluation.
 
 ## Minimal Q9 Run Shape
 
