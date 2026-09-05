@@ -415,6 +415,8 @@ class ConstructionCase:
         # selection and accidental gold-answer leakage.
         if isinstance(self.metadata.get("task_profile"), dict):
             metadata["task_profile"] = dict(self.metadata["task_profile"])
+        if budget is None and isinstance(self.metadata.get("construction_budget"), dict):
+            budget = ConstructionBudget(**self.metadata["construction_budget"])
         return ConstructionRequest(self.case_id, self.raw_requirement, self.harness,
                                    budget or ConstructionBudget(), metadata)
 

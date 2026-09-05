@@ -81,7 +81,7 @@ def test_remote_loader_requests_only_the_selected_row(monkeypatch):
     _, request = seen_urls[0]
     assert request == {
         "dataset": "openlifescienceai/medqa",
-        "config": "med_qa_en_4options_source",
+        "config": "default",
         "split": "test",
         "offset": 29,
         "length": 1,

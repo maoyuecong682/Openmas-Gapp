@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import http.client
 import json
 import time
 import urllib.request
@@ -151,7 +152,8 @@ class OpenAICompatibleAdapter(LLMAdapter):
                 if finish_reason == "length":
                     raise ValueError("response truncated (finish_reason=length)")
                 return AdapterResponse(value, self.config.provider, self.config.model, seed, total_input, total_output, (time.perf_counter() - start) * 1000, raw, attempt, repaired, finish_reason)
-            except (ValueError, KeyError, json.JSONDecodeError, OSError) as exc:
+            except (ValueError, KeyError, json.JSONDecodeError, OSError,
+                    http.client.HTTPException, http.client.IncompleteRead) as exc:
                 last_error = exc
                 if "finish_reason=length" in str(exc):
                     truncation_retries += 1

@@ -1,0 +1,48 @@
+{
+  "schema_version": "q10-financial-v1",
+  "purpose": "Graph Harness financial MAS application case study",
+  "datasets": [
+    {
+      "dataset": "financebench",
+      "source_dataset": "FinanceBench open-source split via Hugging Face rows API",
+      "split": "train",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "CC BY-NC 4.0; verify upstream dataset card before publication",
+      "raw_file": "raw\\financial\\financebench.jsonl",
+      "normalized_file": "normalized\\financebench.jsonl",
+      "pilot_file": "pilot\\financebench_pilot.jsonl",
+      "sha256_raw": "1d8b816835e0dd1b8b1535f1503c120c01061fe61bb5cbda8b52baac6dd6834f",
+      "sha256_normalized": "044a4ec7691ead8f1a4cd4854a0836216fce58feddd92628dd3535d54570971a",
+      "source_status": "public_frozen_rows_api",
+      "remote": {
+        "dataset": "PatronusAI/financebench",
+        "config": "default",
+        "split": "train",
+        "rows_api": "https://datasets-server.huggingface.co/rows?dataset=PatronusAI%2Ffinancebench&config=default&split=train&offset=0&length=3",
+        "num_rows_total": 150
+      }
+    },
+    {
+      "dataset": "finqa",
+      "source_dataset": "FinQA test split via Hugging Face rows API",
+      "split": "test",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "CC-BY-4.0; verify upstream dataset card before publication",
+      "raw_file": "raw\\financial\\finqa.jsonl",
+      "normalized_file": "normalized\\finqa.jsonl",
+      "pilot_file": "pilot\\finqa_pilot.jsonl",
+      "sha256_raw": "878dd7821eb9df7ab9a76b7d5ee9df4a7e046df7092e47dc881f19d2c9b593a9",
+      "sha256_normalized": "1a4f14589a35cd0d9fbba7ebe2c5c0c69601a919ae04eb61336cf3330db895ae",
+      "source_status": "public_frozen_rows_api",
+      "remote": {
+        "dataset": "dreamerdeo/finqa",
+        "config": "default",
+        "split": "test",
+        "rows_api": "https://datasets-server.huggingface.co/rows?dataset=dreamerdeo%2Ffinqa&config=default&split=test&offset=0&length=3",
+        "num_rows_total": 1147
+      }
+    }
+  ]
+}

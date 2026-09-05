@@ -172,13 +172,16 @@ def _is_qualified_row(adapter: DatasetAdapter, row: dict[str, Any]) -> bool:
         return False
     if adapter.dataset_id == "FinQA":
         raw = row.get("raw") or {}
-        return (bool(str((raw.get("metadata") or {}).get("program", "")).strip())
+        metadata = raw.get("metadata") or {}
+        audit_evidence = metadata.get("gold_evidence") or raw.get("gold_evidence")
+        has_audit = bool(str(metadata.get("program", "")).strip()) or bool(audit_evidence)
+        return (has_audit
                 and len(str(context or "")) <= 5000)
     if adapter.dataset_id == "FinanceBench":
         evidence = (row.get("raw") or {}).get("evidence") or []
         nonempty = [item for item in evidence if isinstance(item, dict)
                     and str(item.get("evidence_text") or "").strip()]
-        return len(nonempty) >= 2
+        return len(nonempty) >= 1
     if adapter.dataset_id == "MuSiQue":
         raw = row.get("raw") or {}
         hops = raw.get("question_decomposition") or []

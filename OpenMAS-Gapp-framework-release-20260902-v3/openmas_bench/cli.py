@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 
@@ -8,6 +9,9 @@ from .baselines import BUILDERS, get_builder
 from .construction import Q1_METHODS, get_construction_method
 from .dataset_adapters import all_adapters
 from .dataset_cases import build_dataset_case, load_normalized_rows
+from .dynamic_engine import DynamicGraphEngine
+from .dynamic_executor import DynamicGraphExecutor
+from .dynamic_planner import DeepSeekGraphPlanner
 from .engine import GraphHarnessEngine
 from .evaluate import evaluate_construction, evaluate_spec
 from .io import load_construction_case, load_construction_result, load_package, save_construction_result, save_spec, write_json
@@ -51,6 +55,19 @@ def main() -> None:
     run.add_argument("--model", default="deepseek-chat")
     run.add_argument("--api-key-env", default="OPENMAS_LLM_API_KEY")
     run.add_argument("--output", required=True)
+    plan_demo = sub.add_parser("plan-graph-demo", help="plan two tasks with DeepSeek and print their dynamic graphs")
+    plan_demo.add_argument("--task-a", required=True)
+    plan_demo.add_argument("--task-b", required=True)
+    plan_demo.add_argument("--seed", type=int, default=11)
+    plan_demo.add_argument("--base-url", default="https://api.deepseek.com")
+    plan_demo.add_argument("--model", default="deepseek-chat")
+    plan_demo.add_argument("--api-key-env", default="OPENMAS_LLM_API_KEY")
+    plan_demo.add_argument("--execute", action="store_true")
+    plan_demo.add_argument(
+        "--output-dir",
+        default=str(Path(__file__).resolve().parents[2] / "outputs" / "dynamic_harness_graphs" / "runs"),
+        help="directory for per-task planner, harness graph, and optional execution JSON files",
+    )
     args = parser.parse_args()
     if args.command == "build":
         package = load_package(args.package)
@@ -97,6 +114,39 @@ def main() -> None:
         result = GraphHarnessEngine(adapter, data_root).run_case(
             dataset, row, case, seed=args.seed, intervention=args.intervention)
         write_json(args.output, result.to_experiment_record())
+    elif args.command == "plan-graph-demo":
+        planner = DeepSeekGraphPlanner.from_env(
+            base_url=args.base_url,
+            model=args.model,
+            api_key_envs=(args.api_key_env, "DEEPSEEK_API_KEY"),
+        )
+        engine = DynamicGraphEngine(planner=planner)
+        if args.execute:
+            engine.executor = DynamicGraphExecutor(planner.client.adapter)
+        output_dir = Path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        for index, task in enumerate((args.task_a, args.task_b)):
+            bundle = engine.run(task, seed=args.seed + index, execute=args.execute)
+            run_record = bundle.to_dict()
+            output_path = output_dir / f"task_{index + 1}_seed_{args.seed + index}_dynamic_harness.json"
+            write_json(output_path, run_record)
+            print(f"=== Task {index + 1} ===")
+            print(task)
+            print("Saved output:")
+            print(str(output_path.resolve()))
+            print("Planner output:")
+            print(json.dumps(bundle.plan.to_dict(), ensure_ascii=False, indent=2))
+            print("Final agent list:")
+            print(json.dumps(bundle.plan.to_dict()["agents"], ensure_ascii=False, indent=2))
+            print("Final edges:")
+            print(json.dumps(bundle.plan.to_dict()["edges"], ensure_ascii=False, indent=2))
+            print("Harness Graph:")
+            print(json.dumps(bundle.bundle.to_dict()["harness"], ensure_ascii=False, indent=2))
+            if bundle.execution is not None:
+                print("Executor result:")
+                print(json.dumps(bundle.execution.to_dict(), ensure_ascii=False, indent=2))
+            if index == 0:
+                print()
 
 
 if __name__ == "__main__":

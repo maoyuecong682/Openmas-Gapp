@@ -16,7 +16,7 @@ class FinQADomainPlugin(DomainPlugin):
             table = raw_context.get("table") or []
             if isinstance(table, list) and table:
                 table_lines = []
-                for row_index, row_values in enumerate(table[:4]):
+                for row_index, row_values in enumerate(table):
                     if isinstance(row_values, list):
                         row_text = " | ".join(str(cell).strip() for cell in row_values if str(cell).strip())
                     else:
@@ -33,4 +33,3 @@ class FinQADomainPlugin(DomainPlugin):
             raw = context.row.get("raw") or {}
             values = [str(raw.get("prompt") or raw.get("question") or "").strip()]
         return {f"branch_{index}": value for index, value in enumerate(values) if value}
-

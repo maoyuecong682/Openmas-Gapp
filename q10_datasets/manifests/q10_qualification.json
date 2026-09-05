@@ -1,0 +1,21 @@
+{
+  "schema_version": "q10-financial-qualification-v1",
+  "formal_result": false,
+  "purpose": "pre-model financial contract check",
+  "datasets": [
+    {
+      "dataset": "financebench",
+      "file": "..\\q10_datasets\\normalized\\financebench.jsonl",
+      "status": "qualified",
+      "rows_checked": 3,
+      "errors": []
+    },
+    {
+      "dataset": "finqa",
+      "file": "..\\q10_datasets\\normalized\\finqa.jsonl",
+      "status": "qualified",
+      "rows_checked": 3,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "Q10",
+  "title": "Financial Application Case Study",
+  "purpose": "Test whether Graph Harness can construct and execute a finance-specific MAS application for financial analysis, risk assessment, compliance review and auditable final reporting.",
+  "input": {
+    "requirement": "A financial dataset question and its filing/table evidence contract",
+    "harness": "Shared typed Graph Harness ecosystem",
+    "datasets": ["FinanceBench", "FinQA"]
+  },
+  "required_capabilities": [
+    "filing and table evidence retrieval",
+    "quantitative financial analysis",
+    "risk assessment",
+    "regulatory and disclosure compliance review",
+    "audit trail construction",
+    "governed final reporting"
+  ],
+  "output": [
+    "abstract requirement model",
+    "application blueprint",
+    "executable MAS application graph",
+    "execution trace and runtime diagnostics",
+    "dataset-specific answer score",
+    "source and hash audit"
+  ],
+  "scientific_boundary": "Deterministic smoke validates construction, schema, branch routing, controls and audit plumbing only; it is not evidence of financial advice quality or production regulatory compliance."
+}

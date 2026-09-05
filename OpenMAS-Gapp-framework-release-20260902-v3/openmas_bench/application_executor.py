@@ -550,7 +550,7 @@ def _branch_resources(dataset_id: str, row: dict[str, Any]) -> dict[str, str]:
             table = context.get("table") or []
             if isinstance(table, list) and table:
                 table_lines = []
-                for row_index, row_values in enumerate(table[:4]):
+                for row_index, row_values in enumerate(table):
                     if isinstance(row_values, list):
                         row_text = " | ".join(str(cell).strip() for cell in row_values if str(cell).strip())
                     else:
@@ -574,10 +574,22 @@ def _branch_resources(dataset_id: str, row: dict[str, Any]) -> dict[str, str]:
                     text = str(item.get("evidence_text") or "").strip()
                     if text:
                         snippets.append(f"EVIDENCE_{index + 1}: {text}")
-        # Qualified Q2 rows have at least two independent evidence records.
-        # Route records, not metadata labels or arbitrary character shards.
-        values = ["\n\n".join(snippets[::2]), "\n\n".join(snippets[1::2])] \
-            if len(snippets) >= 2 else snippets
+        # Public FinanceBench rows may have a single evidence record. Keep the
+        # evidence branch intact and route filing metadata to the governance branch.
+        if len(snippets) >= 2:
+            values = ["\n\n".join(snippets[::2]), "\n\n".join(snippets[1::2])]
+        elif len(snippets) == 1:
+            metadata = []
+            for key in ("company", "doc_name", "doc_type", "doc_period", "question_type", "question_reasoning", "dataset_subset_label", "doc_link"):
+                value = raw.get(key)
+                if value is not None and str(value).strip():
+                    metadata.append(f"{key}: {value}")
+            metadata_text = "FILING_METADATA:\n" + "\n".join(metadata) if metadata else (
+                "FILING_METADATA: public FinanceBench row with one evidence record"
+            )
+            values = [snippets[0], metadata_text]
+        else:
+            values = []
         if not values:
             values = [str(raw.get("question") or row.get("question") or "").strip()]
     elif dataset_id in {"BBH", "BBH-Full"}:
