@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from typing import Any
 
@@ -10,11 +11,13 @@ from .financial_profiles import get_financial_profile
 
 TASK_ID = re.compile(r"^[a-z][a-z0-9_]{2, thirty}$".replace("thirty", "30"))
 ALLOWED_RELATIONS = {"precedes", "requires", "reviews", "feedback"}
+LOGGER = logging.getLogger(__name__)
 
 
 def analyze_financial_row(dataset: str, row: dict[str, Any], llm=None, seed: int = 11) -> dict[str, Any]:
     profile = get_financial_profile(dataset)
     prompt = _prompt(profile, row)
+    LOGGER.warning("Q10 analyze_financial_row llm_is_none=%s dataset=%s seed=%s", llm is None, dataset, seed)
     if llm is None:
         analysis = _deterministic_analysis(profile, row)
         source = "deterministic_profile_fallback"
