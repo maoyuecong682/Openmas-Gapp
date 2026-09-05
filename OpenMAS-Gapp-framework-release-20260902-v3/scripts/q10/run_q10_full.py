@@ -1,4 +1,4 @@
-"""Run the full frozen Q10 financial evaluation over all normalized rows."""
+"""Run the full DeepSeek-backed Q10 financial evaluation over all normalized rows."""
 from __future__ import annotations
 
 import argparse
@@ -37,7 +37,12 @@ def _summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--datasets", default="financebench,finqa")
-    parser.add_argument("--provider", choices=("deterministic", "openai_compatible"), default="openai_compatible")
+    parser.add_argument(
+        "--provider",
+        choices=("deterministic", "openai_compatible"),
+        default="openai_compatible",
+        help="deterministic = fixed-seed DeepSeek-backed run; openai_compatible = explicit DeepSeek-compatible run",
+    )
     parser.add_argument("--data-root", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("--output-root", type=Path, default=None)
     parser.add_argument("--seed", type=int, default=11)
@@ -60,26 +65,24 @@ def main() -> None:
     from openmas_bench.q10 import build_q10_case
     from openmas_bench.engine import GraphHarnessEngine
     from openmas_bench.io import write_json
-    from openmas_bench.llm import DeterministicAdapter, LLMConfig, OpenAICompatibleAdapter
+    from openmas_bench.llm import LLMConfig, OpenAICompatibleAdapter
 
     adapters = {item.dataset_id.casefold(): item for item in all_adapters()}
-    if args.provider == "deterministic":
-        llm = DeterministicAdapter(LLMConfig(provider="deterministic", model="deterministic-engine-protocol"))
-    else:
-        api_key = os.environ.get(args.api_key_env)
-        if not api_key:
-            raise RuntimeError(f"missing API key environment variable {args.api_key_env}")
-        llm = OpenAICompatibleAdapter(
-            LLMConfig(
-                provider="openai_compatible",
-                model=args.model,
-                base_url=args.base_url,
-                api_key=api_key,
-                temperature=args.temperature,
-                max_output_tokens=args.max_output_tokens,
-                timeout_seconds=args.timeout_seconds,
-            )
+    api_key = os.environ.get(args.api_key_env) or os.environ.get("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise RuntimeError(f"missing API key environment variable {args.api_key_env} or DEEPSEEK_API_KEY")
+    llm_provider = "deepseek" if args.provider == "deterministic" else "openai_compatible"
+    llm = OpenAICompatibleAdapter(
+        LLMConfig(
+            provider=llm_provider,
+            model=args.model,
+            base_url=args.base_url,
+            api_key=api_key,
+            temperature=args.temperature,
+            max_output_tokens=args.max_output_tokens,
+            timeout_seconds=args.timeout_seconds,
         )
+    )
 
     engine = GraphHarnessEngine(llm, args.data_root)
     dataset_filter = [item.strip() for item in args.datasets.split(",") if item.strip()]
@@ -109,7 +112,7 @@ def main() -> None:
     payload = {
         "schema_version": "q10-full-eval-v1",
         "provider": args.provider,
-        "model": args.model if args.provider != "deterministic" else "deterministic-engine-protocol",
+        "model": args.model,
         "datasets": dataset_filter,
         "seed": args.seed,
         "run_count": len(rows),

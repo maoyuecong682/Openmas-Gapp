@@ -12,6 +12,8 @@ from .row_analyzer import analyze_financial_row
 def build_q10_case(dataset: str, row: dict[str, Any], llm=None, index: int = 0, seed: int = 11):
     adapter = _adapter(dataset)
     analysis = analyze_financial_row(adapter.dataset_id, row, llm=llm, seed=seed)
+    if str(analysis.get("analysis_source", "")).casefold() == "deterministic" or str(analysis.get("model", "")).casefold().startswith("deterministic"):
+        raise ValueError("Q10 analysis must be DeepSeek-backed; deterministic analysis is no longer accepted")
     stages = tuple((item["id"], item["objective"]) for item in analysis["tasks"])
     constraints = tuple((item["id"], "financial_governance", item["target"], item["predicate"]) for item in analysis["constraints"])
     template = replace(
