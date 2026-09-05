@@ -1,0 +1,40 @@
+{
+  "schema_version": "q12_legal_v1",
+  "purpose": "Graph Harness legal MAS application case study",
+  "datasets": [
+    {
+      "dataset": "CaseHOLD",
+      "dataset_key": "casehold",
+      "source_dataset": "casehold/casehold",
+      "split": "validation",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "unverified",
+      "download_url": "https://huggingface.co/datasets/casehold/casehold",
+      "problem_type": "case_citation_selection",
+      "raw_file": "raw\\legal\\casehold.jsonl",
+      "normalized_file": "normalized\\casehold.jsonl",
+      "pilot_file": "pilot\\casehold_pilot.jsonl",
+      "sha256_raw": "dcf3b59b6a583b978cb45a25979a9be65d8abcfd9c241a493cdd98cd8109c3df",
+      "sha256_normalized": "b0900acc4d5d2072f57418983cccfb24e561ad6d6d6b22b76008eb6314d820d9",
+      "source_status": "local_frozen_pilot"
+    },
+    {
+      "dataset": "LegalBench",
+      "dataset_key": "legalbench",
+      "source_dataset": "nguha/legalbench",
+      "split": "validation",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "mixed / task-level",
+      "download_url": "https://huggingface.co/datasets/nguha/legalbench",
+      "problem_type": "legal_mixed_reasoning",
+      "raw_file": "raw\\legal\\legalbench.jsonl",
+      "normalized_file": "normalized\\legalbench.jsonl",
+      "pilot_file": "pilot\\legalbench_pilot.jsonl",
+      "sha256_raw": "1a98069708c9de1c6dd777f8b52e0409c76ab60f1cb99c75f5afa685d6e1c917",
+      "sha256_normalized": "9187a3db0a800088620e5bb81ac8501bcb7b2e6b9358e134f872fe5896f9e73c",
+      "source_status": "local_frozen_pilot"
+    }
+  ]
+}

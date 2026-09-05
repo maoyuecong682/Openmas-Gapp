@@ -1,0 +1,3 @@
+{"type": "bridge", "supporting_facts": [["Rosalind Franklin", 0], ["DNA", 1]], "context": [["Rosalind Franklin", ["Franklin produced X-ray diffraction images of DNA."]], ["DNA", ["The DNA double helix became a central model in molecular biology."]]]}
+{"type": "bridge", "supporting_facts": [["Greenhouse effect", 0], ["Climate model", 0]]}
+{"type": "bridge", "supporting_facts": [["Protein folding", 0], ["X-ray crystallography", 0]]}

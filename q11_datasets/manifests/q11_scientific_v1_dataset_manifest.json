@@ -1,0 +1,57 @@
+{
+  "schema_version": "q11_scientific_v1",
+  "purpose": "Graph Harness scientific discovery MAS application case study",
+  "datasets": [
+    {
+      "dataset": "HotpotQA",
+      "dataset_key": "hotpotqa",
+      "source_dataset": "hotpotqa/hotpotqa",
+      "split": "validation",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "CC BY-SA 4.0",
+      "download_url": "https://huggingface.co/datasets/hotpotqa/hotpotqa",
+      "problem_type": "multi_hop_literature_bridge",
+      "raw_file": "raw\\scientific\\hotpotqa.jsonl",
+      "normalized_file": "normalized\\hotpotqa.jsonl",
+      "pilot_file": "pilot\\hotpotqa_pilot.jsonl",
+      "sha256_raw": "57a25b04821570d1583afe4b23210d30e7529577eae52f7ec170349994427162",
+      "sha256_normalized": "b7aa8991c85eee6e03d4b65808b8a605a833325a9d13c94b24f6da369c3b0c52",
+      "source_status": "local_frozen_pilot"
+    },
+    {
+      "dataset": "MuSiQue",
+      "dataset_key": "musique",
+      "source_dataset": "StonyBrookNLP/musique",
+      "split": "validation",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "CC BY 4.0",
+      "download_url": "https://huggingface.co/datasets/StonyBrookNLP/musique",
+      "problem_type": "controlled_multi_hop_retrieval_reasoning",
+      "raw_file": "raw\\scientific\\musique.jsonl",
+      "normalized_file": "normalized\\musique.jsonl",
+      "pilot_file": "pilot\\musique_pilot.jsonl",
+      "sha256_raw": "7129d024b8f1e2a0d6c650156329779c9435d01e08ac085d33d37ad48fcb2dac",
+      "sha256_normalized": "71ce7e51ce46a4d0195d882e492d7bded1a1eed4d9bd8b2aa59686e9136b0993",
+      "source_status": "local_frozen_pilot"
+    },
+    {
+      "dataset": "DROP",
+      "dataset_key": "drop",
+      "source_dataset": "ucinlp/drop",
+      "split": "validation",
+      "rows": 3,
+      "pilot_rows": 3,
+      "license": "CC BY-SA 4.0",
+      "download_url": "https://huggingface.co/datasets/ucinlp/drop",
+      "problem_type": "reading_numeric_experiment_reasoning",
+      "raw_file": "raw\\scientific\\drop.jsonl",
+      "normalized_file": "normalized\\drop.jsonl",
+      "pilot_file": "pilot\\drop_pilot.jsonl",
+      "sha256_raw": "96fa031718822e863c56731b7be32cc24eff6b3f4f2bc3e43dfcf418200fbf0c",
+      "sha256_normalized": "67421d2ca97b4ee38c6804bd9f6558123f4a1fea052d0504744fdd5715f04447",
+      "source_status": "local_frozen_pilot"
+    }
+  ]
+}

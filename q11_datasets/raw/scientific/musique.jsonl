@@ -1,0 +1,3 @@
+{"answerable": true, "question_decomposition": [{"question": "Which method infers stellar composition?", "paragraph_support_idx": 0}, {"question": "What signal does spectroscopy analyze?", "paragraph_support_idx": 1}]}
+{"answerable": true, "question_decomposition": [{"question": "What does an enzyme assay measure?", "paragraph_support_idx": 0}, {"question": "How is reaction progress observed?", "paragraph_support_idx": 1}]}
+{"answerable": true, "question_decomposition": [{"question": "What do ice cores preserve?", "paragraph_support_idx": 0}, {"question": "What do paleoclimate studies infer?", "paragraph_support_idx": 1}]}
