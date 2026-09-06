@@ -11,6 +11,8 @@ from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont
 
+from graph_layout_common import ordered_layer_positions
+
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -294,6 +296,8 @@ def _build_harness(case_id: str, dataset: str, profile: dict[str, Any]) -> dict[
             "domain": profile["domain"],
             "problem_type": profile["problem_type"],
             "forbidden_components": forbidden,
+            "render_layout": "order_first_layers",
+            "render_order": [str(node["id"]) for node in nodes],
         },
     }
 
@@ -361,7 +365,12 @@ def _build_blueprint(case_id: str, dataset: str, profile: dict[str, Any]) -> dic
         "strategy": "domain_profile_compilation",
         "nodes": nodes,
         "edges": edges,
-        "metadata": {"dataset": dataset, "domain": profile["domain"]},
+        "metadata": {
+            "dataset": dataset,
+            "domain": profile["domain"],
+            "render_layout": "order_first_layers",
+            "render_order": [str(node["id"]) for node in nodes],
+        },
     }
 
 
@@ -372,7 +381,7 @@ def render_harness_png(record: dict[str, Any], output: Path) -> None:
     if not nodes:
         raise ValueError(f"{record.get('dataset', 'dataset')} harness has no nodes")
 
-    positions = _layout(nodes)
+    positions = _layout(nodes, edges, harness.get("metadata") if isinstance(harness.get("metadata"), dict) else None)
     image = Image.new("RGB", (WIDTH, HEIGHT), "#e2e8f0")
     draw = ImageDraw.Draw(image)
     face = _fonts()
@@ -431,23 +440,23 @@ def _fonts() -> dict[str, ImageFont.FreeTypeFont]:
     return {key: fallback for key in ("title", "subtitle", "panel_title", "panel_subtitle", "node", "small", "edge", "legend", "large")}
 
 
-def _layout(nodes: list[dict[str, Any]]) -> dict[str, tuple[float, float]]:
-    order = ["task_pattern", "capability", "component", "constraint", "control", "resource"]
-    columns: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for node in nodes:
-        columns[str(node.get("kind") or "")].append(node)
-    positions: dict[str, tuple[float, float]] = {}
-    available_h = HEIGHT - TOP - 110
-    for column, kind in enumerate(order):
-        values = columns.get(kind, [])
-        if not values:
-            continue
-        x = MARGIN_X + column * COL_GAP
-        span = max(0, len(values) - 1) * ROW_GAP
-        y0 = TOP + max(0, (available_h - span) / 2)
-        for index, node in enumerate(values):
-            positions[str(node["id"])] = (x, y0 + index * ROW_GAP)
-    return positions
+def _layout(
+    nodes: list[dict[str, Any]],
+    edges: list[dict[str, Any]],
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, tuple[float, float]]:
+    order_hint = metadata.get("render_order") if isinstance(metadata, dict) and isinstance(metadata.get("render_order"), list) else None
+    return ordered_layer_positions(
+        [str(node["id"]) for node in nodes],
+        edges,
+        left=0,
+        top=0,
+        width=WIDTH,
+        height=1150,
+        padding_x=MARGIN_X,
+        padding_y=TOP,
+        order_hint=[str(node_id) for node_id in order_hint] if order_hint else None,
+    )
 
 
 def _draw_arrow(
@@ -880,64 +889,16 @@ def _evo_layout(
     x0: int,
     y0: int,
 ) -> dict[str, tuple[float, float]]:
-    outgoing: dict[str, list[str]] = defaultdict(list)
-    indegree = {node_id: 0 for node_id in node_ids}
-    for edge in edges:
-        source = str(edge.get("source")) if isinstance(edge, dict) else str(edge[0])
-        target = str(edge.get("target")) if isinstance(edge, dict) else str(edge[1])
-        if source in indegree and target in indegree:
-            outgoing[source].append(target)
-            indegree[target] += 1
-
-    levels = {node_id: 0 for node_id in node_ids}
-    queue = [node_id for node_id in node_ids if indegree[node_id] == 0]
-    seen = 0
-    while queue:
-        source = queue.pop(0)
-        seen += 1
-        for target in outgoing[source]:
-            levels[target] = max(levels[target], levels[source] + 1)
-            indegree[target] -= 1
-            if indegree[target] == 0:
-                queue.append(target)
-
-    if seen != len(node_ids):
-        return _evo_circle_layout(node_ids, x0, y0)
-
-    by_level: dict[int, list[str]] = defaultdict(list)
-    for node_id in node_ids:
-        by_level[levels[node_id]].append(node_id)
-
-    max_level = max(by_level, default=0)
-    positions: dict[str, tuple[float, float]] = {}
-    usable_w = EV_PANEL_W - 140
-    usable_h = EV_PANEL_H - 180
-    for level in range(max_level + 1):
-        column = by_level[level]
-        x = x0 + 45 + level * (usable_w / max(1, max_level))
-        if len(column) == 1:
-            positions[column[0]] = (x, y0 + 40 + usable_h / 2)
-            continue
-        gap = min(96, max(62, usable_h / max(1, len(column) - 1)))
-        total = gap * (len(column) - 1)
-        start = y0 + 40 + max(0, (usable_h - total) / 2)
-        for index, node_id in enumerate(column):
-            positions[node_id] = (x, start + index * gap)
-    return positions
-
-
-def _evo_circle_layout(node_ids: list[str], x0: int, y0: int) -> dict[str, tuple[float, float]]:
-    count = max(1, len(node_ids))
-    center = (x0 + 45 + (EV_PANEL_W - 140) / 2, y0 + 40 + (EV_PANEL_H - 180) / 2)
-    radius = min((EV_PANEL_W - 170) / 2, (EV_PANEL_H - 240) / 2)
-    radius = max(96, radius)
-    return {
-        node_id: (
-            center[0] + radius * math.cos(2 * math.pi * index / count - math.pi / 2),
-            center[1] + radius * math.sin(2 * math.pi * index / count - math.pi / 2),
-        )
-        for index, node_id in enumerate(node_ids)
-    }
+    return ordered_layer_positions(
+        [str(node_id) for node_id in node_ids],
+        edges,
+        left=x0,
+        top=y0,
+        width=380,
+        height=830,
+        padding_x=45,
+        padding_y=40,
+    )
 
 
 def _draw_evolution_transition(draw: ImageDraw.ImageDraw, x: float, y: float, font: ImageFont.FreeTypeFont) -> None:

@@ -3,12 +3,18 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 import textwrap
-from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+
+from graph_layout_common import ordered_layer_positions
 
 
 CANVAS_W = 1920
@@ -293,59 +299,16 @@ def _layout(
     x0: int,
     y0: int,
 ) -> dict[str, tuple[float, float]]:
-    outgoing: dict[str, list[str]] = defaultdict(list)
-    indegree = {node_id: 0 for node_id in node_ids}
-    for edge in edges:
-        source = str(edge.get("source")) if isinstance(edge, dict) else str(edge[0])
-        target = str(edge.get("target")) if isinstance(edge, dict) else str(edge[1])
-        if source in indegree and target in indegree:
-            outgoing[source].append(target)
-            indegree[target] += 1
-
-    levels = {node_id: 0 for node_id in node_ids}
-    queue = deque(node_id for node_id in node_ids if indegree[node_id] == 0)
-    seen = 0
-    while queue:
-        source = queue.popleft()
-        seen += 1
-        for target in outgoing[source]:
-            levels[target] = max(levels[target], levels[source] + 1)
-            indegree[target] -= 1
-            if indegree[target] == 0:
-                queue.append(target)
-    if seen != len(node_ids):
-        return _circle_layout(node_ids, x0, y0)
-
-    by_level: dict[int, list[str]] = defaultdict(list)
-    for node_id in node_ids:
-        by_level[levels[node_id]].append(node_id)
-    max_level = max(by_level, default=0)
-    positions: dict[str, tuple[float, float]] = {}
-    usable_w = PANEL_W - 140
-    usable_h = PANEL_H - 180
-    for level in range(max_level + 1):
-        column = by_level[level]
-        x = x0 + 45 + level * (usable_w / max(1, max_level))
-        gap = min(96, max(62, usable_h / max(1, len(column) - 1)))
-        total = gap * (len(column) - 1)
-        start = y0 + 40 + max(0, (usable_h - total) / 2)
-        for index, node_id in enumerate(column):
-            positions[node_id] = (x, start + index * gap)
-    return positions
-
-
-def _circle_layout(node_ids: list[str], x0: int, y0: int) -> dict[str, tuple[float, float]]:
-    count = max(1, len(node_ids))
-    center = (x0 + 45 + (PANEL_W - 140) / 2, y0 + 40 + (PANEL_H - 180) / 2)
-    radius = min((PANEL_W - 170) / 2, (PANEL_H - 240) / 2)
-    radius = max(96, radius)
-    return {
-        node_id: (
-            center[0] + radius * math.cos(2 * math.pi * index / count - math.pi / 2),
-            center[1] + radius * math.sin(2 * math.pi * index / count - math.pi / 2),
-        )
-        for index, node_id in enumerate(node_ids)
-    }
+    return ordered_layer_positions(
+        [str(node_id) for node_id in node_ids],
+        edges,
+        left=x0,
+        top=y0,
+        width=380,
+        height=830,
+        padding_x=45,
+        padding_y=40,
+    )
 
 
 def _task_ids(dataset: str) -> list[str]:

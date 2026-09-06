@@ -6,7 +6,6 @@ import json
 import math
 import sys
 import textwrap
-from collections import defaultdict
 from dataclasses import asdict
 from pathlib import Path
 
@@ -17,8 +16,13 @@ CODE_ROOT = Path(__file__).resolve().parents[2]
 if str(CODE_ROOT) not in sys.path:
     sys.path.insert(0, str(CODE_ROOT))
 
+SCRIPT_ROOT = CODE_ROOT / "scripts"
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+
 from openmas_bench.dataset_adapters import all_adapters  # noqa: E402
 from openmas_bench.dataset_cases import build_dataset_case  # noqa: E402
+from graph_layout_common import ordered_layer_positions  # noqa: E402
 
 
 WIDTH = 1920
@@ -94,22 +98,19 @@ def node_label(node: dict) -> str:
     return "\n".join([heading, *wrap_lines(core, 18, 3)])
 
 
-def layout(nodes: list[dict]) -> dict[str, tuple[float, float]]:
-    order = ["task_pattern", "capability", "component", "constraint", "control", "resource"]
-    columns: dict[str, list[dict]] = defaultdict(list)
-    for node in nodes:
-        columns[str(node.get("kind") or "")].append(node)
-    positions: dict[str, tuple[float, float]] = {}
-    for column, kind in enumerate(order):
-        values = columns.get(kind, [])
-        if not values:
-            continue
-        x = MARGIN_X + column * COL_GAP
-        total = len(values) * NODE_H + max(0, len(values) - 1) * (ROW_GAP - NODE_H)
-        y0 = TOP + max(0, (HEIGHT - TOP - 90 - total) / 2)
-        for index, node in enumerate(values):
-            positions[str(node["id"])] = (x, y0 + index * ROW_GAP)
-    return positions
+def layout(nodes: list[dict], edges: list[dict], metadata: dict | None = None) -> dict[str, tuple[float, float]]:
+    order_hint = metadata.get("render_order") if isinstance(metadata, dict) and isinstance(metadata.get("render_order"), list) else None
+    return ordered_layer_positions(
+        [str(node["id"]) for node in nodes],
+        edges,
+        left=0,
+        top=0,
+        width=WIDTH,
+        height=1170,
+        padding_x=MARGIN_X,
+        padding_y=TOP,
+        order_hint=[str(node_id) for node_id in order_hint] if order_hint else None,
+    )
 
 
 def draw_arrow(draw: ImageDraw.ImageDraw, source: tuple[float, float], target: tuple[float, float], relation: str, font: ImageFont.FreeTypeFont) -> None:
@@ -149,7 +150,7 @@ def render(dataset: str, row: dict, output: Path, harness_override: dict | None 
         harness = asdict(case.harness)
     nodes = harness["nodes"]
     edges = harness["edges"]
-    positions = layout(nodes)
+    positions = layout(nodes, edges, harness.get("metadata") if isinstance(harness.get("metadata"), dict) else None)
     image = Image.new("RGB", (WIDTH, HEIGHT), "#e2e8f0")
     draw = ImageDraw.Draw(image)
     face = fonts()

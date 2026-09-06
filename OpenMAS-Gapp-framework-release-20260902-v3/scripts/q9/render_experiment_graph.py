@@ -3,13 +3,19 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 import textwrap
-from collections import defaultdict, deque
 from html import escape
 from pathlib import Path
 from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+
+from graph_layout_common import ordered_layer_positions
 
 
 RADIUS = 42
@@ -179,59 +185,16 @@ def render_graph_svg(
 
 
 def _hierarchical_layout(node_ids: list[str], edges: list[dict[str, Any]]) -> dict[str, tuple[float, float]]:
-    outgoing: dict[str, list[str]] = defaultdict(list)
-    indegree = {node_id: 0 for node_id in node_ids}
-    for edge in edges:
-        source = str(edge.get("source"))
-        target = str(edge.get("target"))
-        if source in indegree and target in indegree:
-            outgoing[source].append(target)
-            indegree[target] += 1
-
-    levels = {node_id: 0 for node_id in node_ids}
-    queue = deque([node_id for node_id in node_ids if indegree[node_id] == 0])
-    seen = 0
-    while queue:
-        source = queue.popleft()
-        seen += 1
-        for target in outgoing[source]:
-            levels[target] = max(levels[target], levels[source] + 1)
-            indegree[target] -= 1
-            if indegree[target] == 0:
-                queue.append(target)
-
-    if seen != len(node_ids):
-        return _circular_layout(node_ids)
-
-    by_level: dict[int, list[str]] = defaultdict(list)
-    for node_id in node_ids:
-        by_level[levels[node_id]].append(node_id)
-
-    max_rows = max((len(values) for values in by_level.values()), default=1)
-    graph_height = max(1, max_rows - 1) * Y_GAP
-    positions: dict[str, tuple[float, float]] = {}
-    for level in range(max(by_level) + 1):
-        column = by_level.get(level, [])
-        column_height = max(0, len(column) - 1) * Y_GAP
-        y0 = MARGIN + (graph_height - column_height) / 2
-        x = MARGIN + level * X_GAP
-        for index, node_id in enumerate(column):
-            positions[node_id] = (x, y0 + index * Y_GAP)
-    return positions
-
-
-def _circular_layout(node_ids: list[str]) -> dict[str, tuple[float, float]]:
-    count = max(1, len(node_ids))
-    radius = max(150, count * 28)
-    center = (MARGIN + radius, MARGIN + radius)
-    positions = {}
-    for index, node_id in enumerate(node_ids):
-        angle = (2 * math.pi * index / count) - math.pi / 2
-        positions[node_id] = (
-            center[0] + radius * math.cos(angle),
-            center[1] + radius * math.sin(angle),
-        )
-    return positions
+    return ordered_layer_positions(
+        [str(node_id) for node_id in node_ids],
+        edges,
+        left=0,
+        top=0,
+        width=PNG_W,
+        height=PNG_H,
+        padding_x=PNG_MARGIN_X,
+        padding_y=PNG_MARGIN_Y,
+    )
 
 
 def _canvas_size(positions: dict[str, tuple[float, float]]) -> tuple[int, int]:

@@ -6,6 +6,7 @@ from typing import Any
 
 from ..dataset_adapters import DATASET_ADAPTERS
 from ..dataset_cases import build_dataset_case
+from ..dynamic_graph import execution_layers, topological_order
 from .row_analyzer import analyze_financial_row
 
 
@@ -30,7 +31,15 @@ def build_q10_case(dataset: str, row: dict[str, Any], llm=None, index: int = 0, 
     dynamic_adapter = replace(adapter, template=template, source_file=f"q10_datasets/normalized/{dataset.casefold()}.jsonl")
     case = build_dataset_case(dynamic_adapter, row, index)
     _replace_dependencies(case, analysis)
+    case.harness.metadata["render_layout"] = "order_first_layers"
+    case.harness.metadata["render_order"] = [node.id for node in case.harness.nodes]
+    case.harness.metadata["topological_order"] = topological_order(case.harness)
+    case.harness.metadata["parallel_groups"] = execution_layers(case.harness)
+    case.reference_blueprint.metadata["render_layout"] = "order_first_layers"
+    case.reference_blueprint.metadata["render_order"] = [node.id for node in case.reference_blueprint.nodes]
     case.metadata["q10_analysis"] = analysis
+    case.metadata["graph_layout"] = "order_first_layers"
+    case.metadata["graph_order"] = [node.id for node in case.harness.nodes]
     case.metadata["construction_budget"] = {
         "max_components": 16,
         "max_edges": 32,
